@@ -12,28 +12,28 @@
                         <Sequence>
                             <OpenVINOEvent object="cat"/>
                             <Sequence>
-                              <SubTree ID="MoveRobot" target="Foward" />
-                              <SubTree ID="MoveRobot" target="Stop" />
-                              <SubTree ID="MoveRobot" target="Backward" />
-                              <SubTree ID="MoveRobot" target="Stop" />
-                              </Sequence>
-                        </Sequence>
-                        <Sequence>
-                            <OpenVINOEvent object="sofa"/>
-                            <Sequence>
-                              <SubTree ID="MoveRobot" target="Backward" />
-                              <SubTree ID="MoveRobot" target="Stop" />
-                              <SubTree ID="MoveRobot" target="Foward" />
-                              <SubTree ID="MoveRobot" target="Stop" />
+                                <SubTree ID="MoveRobot" target="Foward" />
+                                <SubTree ID="MoveRobot" target="Stop" />
+                                <SubTree ID="MoveRobot" target="Backward" />
+                                <SubTree ID="MoveRobot" target="Stop" />
                             </Sequence>
                         </Sequence>
                         <Sequence>
                             <OpenVINOEvent object="dog"/>
                             <Sequence>
-                              <SubTree ID="MoveRobot" target="Left" />
-                              <SubTree ID="MoveRobot" target="Stop" />
-                              <SubTree ID="MoveRobot" target="Right" />
-                              <SubTree ID="MoveRobot" target="Stop" />
+                                <SubTree ID="MoveRobot" target="Backward" />
+                                <SubTree ID="MoveRobot" target="Stop" />
+                                <SubTree ID="MoveRobot" target="Foward" />
+                                <SubTree ID="MoveRobot" target="Stop" />
+                            </Sequence>
+                        </Sequence>
+                        <Sequence>
+                            <OpenVINOEvent object="cow"/>
+                            <Sequence>
+                                <SubTree ID="MoveRobot" target="Left" />
+                                <SubTree ID="MoveRobot" target="Stop" />
+                                <SubTree ID="MoveRobot" target="Right" />
+                                <SubTree ID="MoveRobot" target="Stop" />
                             </Sequence>
                         </Sequence>
                     </Fallback>
