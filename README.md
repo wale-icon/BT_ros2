@@ -19,6 +19,8 @@ rosdep install --from-paths src --ignore-src -r -y
 3. Build
 ```bash
 colcon build --symlink-install
+# If you want to build with OpenVINO support
+colcon build --symlink-install --cmake-args -DBUILD_OPENVINO=ON
 ```
 
 # Usage
@@ -99,6 +101,37 @@ source ~/bt_ros2_ws/install/local_setup.bash
 ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_xml/bt_snapshot.xml
 ```
 
+## Advanced Example - OpenVINO object detection
+
+This demo shows an integrated application with object detection and robot navigation.
+With different signal triggered by OpenVINO, the robot will navigate to certain position.
+
+* Open 1st terminal and run mememan world.
+```bash
+source /opt/ros/<ROS2_DISTRO>/local_setup.bash
+source ~/neuronbot2_ros2_ws/install/local_setup.bash
+ros2 launch neuronbot2_gazebo neuronbot2_world.launch.py world_model:=mememan_world.model
+```
+* Open 2nd terminal and run OpenVINO object detection
+```bash
+# Source ROS 2 environment
+# Setup OpenVINO environment and source wrapper
+ros2 launch dynamic_vino_sample pipeline_object.launch.py
+```
+* Open 3rd terminal and run navigation.
+```bash
+source /opt/ros/<ROS2_DISTRO>/local_setup.bash
+source ~/neuronbot2_ros2_ws/install/local_setup.bash
+ros2 launch neuronbot2_nav bringup_launch.py map:=$HOME/neuronbot2_ros2_ws/src/neuronbot2/neuronbot2_nav/map/mememan.yaml open_rviz:=true use_sim_time:=true
+```
+* Open 4th terminal and run BT
+```bash
+# Source ROS 2 environment
+source ~/bt_ros2_ws/install/local_setup.bash
+ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_xml/bt_openvino.xml
+# An additional bt_xml file is prepared, which switch the action after trigger from navigation to teleop command.
+# ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_xml/bt_openvino_teleop.xml
+```
 # Note
 If you want to get the coordinate for navigation, you can run navigation2 and listen to the topic /goal_pose or open rviz2 to monitor tf.
 

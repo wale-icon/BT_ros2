@@ -15,6 +15,8 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+option(BUILD_OPENVINO "Build OpenVINO" OFF)
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -24,6 +26,31 @@ find_package(geometry_msgs REQUIRED)
 find_package(nav2_behavior_tree REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(behaviortree_cpp_v3 REQUIRED)
+
+if(BUILD_OPENVINO STREQUAL "ON")
+  find_package(object_msgs REQUIRED)
+  set(dependencies
+    rclcpp
+    rclcpp_action
+    std_msgs
+    geometry_msgs
+    nav2_behavior_tree
+    nav2_msgs
+    behaviortree_cpp_v3
+    object_msgs
+  )   
+  add_definitions(-DSUPPORT_OPENVINO)
+else()
+  set(dependencies
+    rclcpp
+    rclcpp_action
+    std_msgs
+    geometry_msgs
+    nav2_behavior_tree
+    nav2_msgs
+    behaviortree_cpp_v3
+  )   
+endif()
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -36,15 +63,6 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-set(dependencies
-  rclcpp
-  rclcpp_action
-  std_msgs
-  geometry_msgs
-  nav2_behavior_tree
-  nav2_msgs
-  behaviortree_cpp_v3
-)
 
 add_executable(send_goal 
   src/send_goal
