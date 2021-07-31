@@ -107,6 +107,7 @@ ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_x
 
 This demo shows an integrated application with object detection and robot navigation.
 With different signal triggered by OpenVINO, the robot will navigate to certain position.
+The objects in the BT file are animals, which are cat, dog, cow.
 
 * Open 1st terminal and run mememan world.
 ```bash
