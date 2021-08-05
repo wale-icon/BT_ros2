@@ -19,7 +19,8 @@ rosdep install --from-paths src --ignore-src -r -y
 3. Build
 ```bash
 colcon build --symlink-install
-# If you want to build with OpenVINO support
+# If you want to build with OpenVINO support, add the define
+# Remember to source OpenVINO before build
 colcon build --symlink-install --cmake-args -DBUILD_OPENVINO=ON
 ```
 
@@ -79,6 +80,7 @@ ros2 topic pub -1 /interrupt_event std_msgs/msg/String data:\ \'gohome\'
 ```
 
 ## Advanced Example - Take a snapshot
+
 The demo is to show how to take snapshots with BT example.
 You need to install OpenVINO and its ROS 2 wrapper before using the example.
 
@@ -105,10 +107,11 @@ ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_x
 
 This demo shows an integrated application with object detection and robot navigation.
 With different signal triggered by OpenVINO, the robot will navigate to certain position.
+The objects in the BT file are animals, which are cat, dog, cow.
 
 * Open 1st terminal and run mememan world.
 ```bash
-source /opt/ros/<ROS2_DISTRO>/local_setup.bash
+# Source ROS 2 environment
 source ~/neuronbot2_ros2_ws/install/local_setup.bash
 ros2 launch neuronbot2_gazebo neuronbot2_world.launch.py world_model:=mememan_world.model
 ```
@@ -120,19 +123,22 @@ ros2 launch dynamic_vino_sample pipeline_object.launch.py
 ```
 * Open 3rd terminal and run navigation.
 ```bash
-source /opt/ros/<ROS2_DISTRO>/local_setup.bash
+# Source ROS 2 environment
 source ~/neuronbot2_ros2_ws/install/local_setup.bash
 ros2 launch neuronbot2_nav bringup_launch.py map:=$HOME/neuronbot2_ros2_ws/src/neuronbot2/neuronbot2_nav/map/mememan.yaml open_rviz:=true use_sim_time:=true
 ```
 * Open 4th terminal and run BT
 ```bash
 # Source ROS 2 environment
+# Setup OpenVINO environment and source wrapper
 source ~/bt_ros2_ws/install/local_setup.bash
 ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_xml/bt_openvino.xml
 # An additional bt_xml file is prepared, which switch the action after trigger from navigation to teleop command.
-# ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_xml/bt_openvino_teleop.xml
+#ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_xml/bt_openvino_teleop.xml
 ```
+
 # Note
+
 If you want to get the coordinate for navigation, you can run navigation2 and listen to the topic /goal_pose or open rviz2 to monitor tf.
 
 The position and orientation should be put into BT file and the orientation value we use here is Quaternion.

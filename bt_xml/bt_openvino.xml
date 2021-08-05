@@ -14,13 +14,13 @@
                             </Sequence>
                         </Sequence>
                         <Sequence>
-                            <OpenVINOEvent object="sofa"/>
+                            <OpenVINOEvent object="dog"/>
                             <Sequence>
                                 <SubTree ID="MoveRobot" target="Goal_a" />
                             </Sequence>
                         </Sequence>
                         <Sequence>
-                            <OpenVINOEvent object="dog"/>
+                            <OpenVINOEvent object="cow"/>
                             <Sequence>
                                 <SubTree ID="MoveRobot" target="Goal_b" />
                             </Sequence>
