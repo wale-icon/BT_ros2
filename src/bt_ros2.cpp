@@ -2,6 +2,7 @@
 #include "interrupt_event.hpp"
 #include "snapshot_client.hpp"
 #include "teleop_event.hpp"
+#include "autodock_client.hpp"
 #ifdef SUPPORT_OPENVINO
     #include "openvino_event.hpp"
 #endif
@@ -30,6 +31,7 @@ int main(int argc, char **argv)
     factory.registerNodeType<InterruptEvent>("InterruptEvent");
     factory.registerNodeType<SnapshotClient>("SnapshotClient");
     factory.registerNodeType<SendCommandVel>("SendCommandVel");
+    factory.registerNodeType<AutodockClient>("AutodockClient");
 #ifdef SUPPORT_OPENVINO
     factory.registerNodeType<OpenVINOEvent>("OpenVINOEvent");
 #endif

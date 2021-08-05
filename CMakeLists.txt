@@ -25,6 +25,7 @@ find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav2_behavior_tree REQUIRED)
 find_package(nav2_msgs REQUIRED)
+find_package(autodock_msgs REQUIRED)
 find_package(behaviortree_cpp_v3 REQUIRED)
 
 if(BUILD_OPENVINO STREQUAL "ON")
@@ -38,6 +39,7 @@ if(BUILD_OPENVINO STREQUAL "ON")
     nav2_msgs
     behaviortree_cpp_v3
     object_msgs
+    autodock_msgs
   )   
   add_definitions(-DSUPPORT_OPENVINO)
 else()
@@ -49,6 +51,7 @@ else()
     nav2_behavior_tree
     nav2_msgs
     behaviortree_cpp_v3
+    autodock_msgs
   )   
 endif()
 
