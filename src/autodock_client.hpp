@@ -1,6 +1,6 @@
 #include <unistd.h> // Used by sleep
 #include "rclcpp/rclcpp.hpp"
-#include "autodock_msgs/srv/docking_action.hpp"
+#include "autodock_msgs/srv/docking.hpp"
 #include "autodock_msgs/msg/current_state.hpp"
 #include <behaviortree_cpp_v3/action_node.h>
 
@@ -19,7 +19,7 @@ public:
         : BT::SyncActionNode(name, config)
     {
         node_ = rclcpp::Node::make_shared("AutodockClient");
-        client_ = node_->create_client < autodock_msgs::srv::DockingAction > ("autodock_controller/set_action");
+        client_ = node_->create_client < autodock_msgs::srv::Docking > ("autodock_controller/docking_service");
         sub_ = node_->create_subscription < autodock_msgs::msg::CurrentState > (
             "/autodock_controller/current_state", 1000, &DockingStateCallback);
     }
@@ -40,21 +40,21 @@ public:
         // Waiting for service /save
         while (!client_->wait_for_service(std::chrono::seconds(1))) {
             if (!rclcpp::ok()) {
-                RCLCPP_ERROR(node_->get_logger(), "Interrupted while waiting for service /autodock_controller/set_action.");
+                RCLCPP_ERROR(node_->get_logger(), "Interrupted while waiting for service /autodock_controller/docking_service.");
                 return BT::NodeStatus::FAILURE;
             }
-            RCLCPP_INFO(node_->get_logger(), "Waiting for service /autodock_controller/set_action to appear...");
+            RCLCPP_INFO(node_->get_logger(), "Waiting for service /autodock_controller/docking_service to appear...");
         }
         sleep(3); // To stablize the camera
-        auto request = std::make_shared < autodock_msgs::srv::DockingAction::Request > ();
-        request->action = desired_action;
+        auto request = std::make_shared < autodock_msgs::srv::Docking::Request > ();
+        request->service = desired_action;
         auto result_future = client_->async_send_request(request);
 
         if (rclcpp::spin_until_future_complete(node_, result_future) != rclcpp::FutureReturnCode::SUCCESS) {
-            RCLCPP_ERROR(node_->get_logger(), "Unable to call /autodock_controller/set_action");
+            RCLCPP_ERROR(node_->get_logger(), "Unable to call /autodock_controller/docking_service");
             return BT::NodeStatus::FAILURE;
-        } else if (!result_future.get()->action_success) {
-            RCLCPP_ERROR(node_->get_logger(), "autodock_controller set_action failed.");
+        } else if (!result_future.get()->service_success) {
+            RCLCPP_ERROR(node_->get_logger(), "autodock_controller docking_service failed.");
             return BT::NodeStatus::FAILURE;
         }
 
@@ -69,6 +69,6 @@ public:
 
 private:
     rclcpp::Node::SharedPtr node_;
-    rclcpp::Client < autodock_msgs::srv::DockingAction > ::SharedPtr client_;
+    rclcpp::Client < autodock_msgs::srv::Docking > ::SharedPtr client_;
     rclcpp::Subscription < autodock_msgs::msg::CurrentState > ::SharedPtr sub_;
 };

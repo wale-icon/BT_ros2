@@ -16,6 +16,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 option(BUILD_OPENVINO "Build OpenVINO" OFF)
+option(BUILD_AUTODOCK "Build Auto Docking" OFF)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -25,35 +26,30 @@ find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav2_behavior_tree REQUIRED)
 find_package(nav2_msgs REQUIRED)
-find_package(autodock_msgs REQUIRED)
 find_package(behaviortree_cpp_v3 REQUIRED)
 
 if(BUILD_OPENVINO STREQUAL "ON")
   find_package(object_msgs REQUIRED)
-  set(dependencies
-    rclcpp
-    rclcpp_action
-    std_msgs
-    geometry_msgs
-    nav2_behavior_tree
-    nav2_msgs
-    behaviortree_cpp_v3
-    object_msgs
-    autodock_msgs
-  )   
+  set(OTHER_DEPS ${OTHER_DEPS} object_msgs)
   add_definitions(-DSUPPORT_OPENVINO)
-else()
-  set(dependencies
-    rclcpp
-    rclcpp_action
-    std_msgs
-    geometry_msgs
-    nav2_behavior_tree
-    nav2_msgs
-    behaviortree_cpp_v3
-    autodock_msgs
-  )   
 endif()
+
+if(BUILD_AUTODOCK STREQUAL "ON")
+  find_package(autodock_msgs REQUIRED)
+  set(OTHER_DEPS ${OTHER_DEPS} autodock_msgs)
+  add_definitions(-DSUPPORT_AUTODOCK)
+endif()
+
+set(dependencies
+  rclcpp
+  rclcpp_action
+  std_msgs
+  geometry_msgs
+  nav2_behavior_tree
+  nav2_msgs
+  behaviortree_cpp_v3
+  ${OTHER_DEPS}
+)  
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
