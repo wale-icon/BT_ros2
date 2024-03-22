@@ -3,16 +3,21 @@
         <Repeat num_cycles="1">
             <Sequence>
                 <!-- The goal value="position-x;position-y;orientaion-z;orientation-w" -->
+                <!-- Simulation Goal Points -->
                 <!--<SetBlackboard output_key="Goal_a" value="-0.579;-1.341;0.0;1.0" />
                 <SetBlackboard output_key="Goal_b" value="5.214;-1.533;0.0;1.0" />
                 <SetBlackboard output_key="Goal_c" value="-1.588;1.253;0.0;1.0" /> -->
-                <SetBlackboard output_key="Goal_a" value="28.88;97.60;0.0;1.0" />
-                <SetBlackboard output_key="Goal_b" value="37.14;94.88;0.0;1.0" />
-                <SetBlackboard output_key="Goal_c" value="34.75;85.28;0.0;1.0" />
+
+                <!-- Robot Goal Points -->
+                <SetBlackboard output_key="Goal_a" value="24.775152 ; 90.070045 ; 0.0; 1.0" />
+                <SetBlackboard output_key="Goal_b" value="27.555534 ; 98.667030 ; 0.0; 1.0" />
+                <SetBlackboard output_key="Goal_c" value="37.526741 ; 95.134407 ; 0.0; 1.0" />
+                <SetBlackboard output_key="Goal_d" value="34.753151 ; 85.907974 ; 0.0; 1.0" />
                 <Sequence>
                     <SubTree ID="MoveRobot" target="Goal_a" />
                     <SubTree ID="MoveRobot" target="Goal_b" />
                     <SubTree ID="MoveRobot" target="Goal_c" />
+                    <SubTree ID="MoveRobot" target="Goal_d" />
                 </Sequence>
             </Sequence>
         </Repeat>
