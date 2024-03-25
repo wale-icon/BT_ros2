@@ -88,7 +88,7 @@ public:
         goal_msg.pose.pose.position.y = goal.y;
         goal_msg.pose.pose.position.z = 0.0;
         
-	goal_msg.pose.pose.orientation.x = 0;
+	    goal_msg.pose.pose.orientation.x = 0;
         goal_msg.pose.pose.orientation.y = 0;
         goal_msg.pose.pose.orientation.z = goal.quaternion_z;
         goal_msg.pose.pose.orientation.w = goal.quaternion_w;

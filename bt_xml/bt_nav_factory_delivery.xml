@@ -1,21 +1,33 @@
 <root main_tree_to_execute = "MainTree">
     <BehaviorTree ID="MainTree">
         <Sequence>
-           <SetBlackboard output_key="Goal_a" value="13.3 ; -24.8 ; 0.0; 1.0" />
+             <!-- Robot Goal Points 
+             Goal_a - Pick up location 1
+             Goal_b - Pick up location 2
+             Goal_c - Charging station / Home - 
+             
+             -->
+            <SetBlackboard output_key="Goal_a" value="13.3 ; -24.8 ; 0.0; 1.0" />
             <SetBlackboard output_key="Goal_b" value="5.00 ; -26.2 ; 0.0; 1.0" />
             <SetBlackboard output_key="Goal_c" value="5.00 ; -22.0 ; 0.0; 1.0" />
             <Fallback>
                 <ReactiveSequence>
                     <InterruptEvent event="gohome"/>
-                    <Repeat num_cycles="10">
+                    <Repeat num_cycles="2">
                         <Sequence>
                             <SubTree ID="MoveRobot" target="Goal_a" />
+                            <Wait wait_duration="5.0"/>
+                            <!-- Load/Unload behavior here -->
                             <SubTree ID="MoveRobot" target="Goal_b" />
+                            <!-- Load/Unload behavior here -->
+                            <SubTree ID="MoveRobot" target="Goal_c" /> 
+                            <!-- dock/unDock behavior here -->
                         </Sequence>
                     </Repeat>
                 </ReactiveSequence>
                 <Sequence>
-                    <SubTree ID="MoveRobot" target="Goal_c" />
+                    <SubTree ID="MoveRobot" target="Goal_c" /> 
+                    <!-- dock/unDock behavior here -->
                 </Sequence>
             </Fallback>
         </Sequence>
