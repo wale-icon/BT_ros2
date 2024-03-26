@@ -1,19 +1,19 @@
 #pragma once
 #include "rclcpp/rclcpp.hpp"
 #include <geometry_msgs/msg/twist.hpp>
-#include <behaviortree_cpp_v3/action_node.h>
+#include <behaviortree_cpp/action_node.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <termios.h>
 //#include <actionlib/client/simple_action_client.h>
-#include "behaviortree_cpp_v3/behavior_tree.h"
-#include "behaviortree_cpp_v3/bt_factory.h"
+#include "behaviortree_cpp/behavior_tree.h"
+#include "behaviortree_cpp/bt_factory.h"
 
-class SendCommandVel : public BT::AsyncActionNode
+class SendCommandVel : public BT::ThreadedAction
 {
   public:
-    SendCommandVel(const std::string& name, const BT::NodeConfiguration& config)
-        : BT::AsyncActionNode(name, config)
+    SendCommandVel(const std::string& name, const BT::NodeConfig& config)
+        : BT::ThreadedAction(name, config)
     {
         // Init cmd_vel publisher
         node_ = rclcpp::Node::make_shared("teleop_event");

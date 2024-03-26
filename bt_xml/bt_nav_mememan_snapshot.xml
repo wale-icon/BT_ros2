@@ -1,4 +1,5 @@
-<root main_tree_to_execute = "MainTree">
+<?xml version='1.0' encoding='UTF-8'?>
+<root main_tree_to_execute="MainTree" BTCPP_format="4">
     <BehaviorTree ID="MainTree">
         <Repeat num_cycles="3">
             <Sequence>
@@ -6,12 +7,12 @@
                 <SetBlackboard output_key="Goal_b" value="5.214;-1.533;0.0;1.0" />
                 <SetBlackboard output_key="Goal_c" value="-1.588;1.253;0.0;1.0" />
                 <Sequence>
-                    <SubTree ID="MoveRobot" target="Goal_a" />
-                    <SnapshotClient/>
-                    <SubTree ID="MoveRobot" target="Goal_b" />
-                    <SnapshotClient/>
-                    <SubTree ID="MoveRobot" target="Goal_c" />
-                    <SnapshotClient/>
+                    <SubTree ID="MoveRobot" target="{Goal_a}" />
+                    <SnapshotClient />
+                    <SubTree ID="MoveRobot" target="{Goal_b}" />
+                    <SnapshotClient />
+                    <SubTree ID="MoveRobot" target="{Goal_c}" />
+                    <SnapshotClient />
                 </Sequence>
             </Sequence>
         </Repeat>

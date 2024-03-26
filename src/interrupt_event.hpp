@@ -2,7 +2,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
-#include <behaviortree_cpp_v3/action_node.h>
+#include <behaviortree_cpp/action_node.h>
 
 static std::string interrupt_event;
 
@@ -15,7 +15,7 @@ void interruptCallback(const std_msgs::msg::String::SharedPtr msg)
 class InterruptEvent : public BT::SyncActionNode
 {
     public:
-        InterruptEvent(const std::string& name, const BT::NodeConfiguration& config)
+        InterruptEvent(const std::string& name, const BT::NodeConfig& config)
             : BT::SyncActionNode(name, config)
         {
             node_ = rclcpp::Node::make_shared("interupt_event");
