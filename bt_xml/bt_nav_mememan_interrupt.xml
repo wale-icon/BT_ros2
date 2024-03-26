@@ -1,21 +1,22 @@
-<root main_tree_to_execute = "MainTree">
+<?xml version='1.0' encoding='UTF-8'?>
+<root main_tree_to_execute="MainTree" BTCPP_format="4">
     <BehaviorTree ID="MainTree">
         <Sequence>
-           <SetBlackboard output_key="Goal_a" value="13.3 ; -24.8 ; 0.0; 1.0" />
-            <SetBlackboard output_key="Goal_b" value="5.00 ; -26.2 ; 0.0; 1.0" />
-            <SetBlackboard output_key="Goal_c" value="5.00 ; -22.0 ; 0.0; 1.0" />
+            <SetBlackboard output_key="Goal_a" value="-0.579;-1.341;0.0;1.0" />
+            <SetBlackboard output_key="Goal_b" value="5.214;-1.533;0.0;1.0" />
+            <SetBlackboard output_key="Goal_c" value="-1.588;1.253;0.0;1.0" />
             <Fallback>
                 <ReactiveSequence>
-                    <InterruptEvent event="gohome"/>
+                    <InterruptEvent event="gohome" />
                     <Repeat num_cycles="10">
                         <Sequence>
-                            <SubTree ID="MoveRobot" target="Goal_a" />
-                            <SubTree ID="MoveRobot" target="Goal_b" />
+                            <SubTree ID="MoveRobot" target="{Goal_a}" />
+                            <SubTree ID="MoveRobot" target="{Goal_b}" />
                         </Sequence>
                     </Repeat>
                 </ReactiveSequence>
                 <Sequence>
-                    <SubTree ID="MoveRobot" target="Goal_c" />
+                    <SubTree ID="MoveRobot" target="{Goal_c}" />
                 </Sequence>
             </Fallback>
         </Sequence>

@@ -10,7 +10,7 @@ def generate_launch_description():
     bt_xml_dir = os.path.join(get_package_share_directory('bt_ros2'), 'bt_xml')
 
     # Parameters
-    #bt_xml = LaunchConfiguration('bt_xml', default=bt_xml_dir+'/bt_nav_mememan.xml')
+    # bt_xml = LaunchConfiguration('bt_xml', default=bt_xml_dir+'/bt_nav_mememan.xml')
     bt_xml = LaunchConfiguration('bt_xml', default=bt_xml_dir+'/bt_nav_factory_delivery.xml')  
     #bt_xml = LaunchConfiguration('bt_xml', default=bt_xml_dir+'/bt_nav_mememan_interrupt.xml') 
 

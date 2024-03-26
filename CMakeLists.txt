@@ -27,6 +27,9 @@ find_package(geometry_msgs REQUIRED)
 find_package(nav2_behavior_tree REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
+find_package(nav2_behaviors REQUIRED) # added by WMN
+find_package(nav2_core REQUIRED)
+
 
 if(BUILD_OPENVINO STREQUAL "ON")
   find_package(object_msgs REQUIRED)
@@ -46,6 +49,8 @@ set(dependencies
   std_msgs
   geometry_msgs
   nav2_behavior_tree
+  nav2_behaviors
+  nav2_core
   nav2_msgs
   behaviortree_cpp
   ${OTHER_DEPS}

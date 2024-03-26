@@ -2,6 +2,7 @@
 #include "interrupt_event.hpp"
 #include "snapshot_client.hpp"
 #include "teleop_event.hpp"
+// #include "nav2_behavior_tree/plugins/action/wait_action.hpp"
 
 #ifdef SUPPORT_OPENVINO
     #include "openvino_event.hpp"
@@ -37,6 +38,7 @@ int main(int argc, char **argv)
     factory.registerNodeType<InterruptEvent>("InterruptEvent");
     factory.registerNodeType<SnapshotClient>("SnapshotClient");
     factory.registerNodeType<SendCommandVel>("SendCommandVel");
+    // factory.registerNodeType<nav2_behavior_tree::WaitAction>("Wait");
 #ifdef SUPPORT_OPENVINO
     factory.registerNodeType<OpenVINOEvent>("OpenVINOEvent");
 #endif
