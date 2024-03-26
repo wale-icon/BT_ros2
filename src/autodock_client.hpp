@@ -2,7 +2,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "autodock_msgs/srv/docking.hpp"
 #include "autodock_msgs/msg/current_state.hpp"
-#include <behaviortree_cpp_v3/action_node.h>
+#include <behaviortree_cpp/action_node.h>
 
 std::string docking_state, action_state;
 
@@ -15,7 +15,7 @@ void DockingStateCallback(const autodock_msgs::msg::CurrentState::SharedPtr msg)
 class AutodockClient: public BT::SyncActionNode
 {
 public:
-    AutodockClient(const std::string& name, const BT::NodeConfiguration& config)
+    AutodockClient(const std::string& name, const BT::NodeConfig& config)
         : BT::SyncActionNode(name, config)
     {
         node_ = rclcpp::Node::make_shared("AutodockClient");
