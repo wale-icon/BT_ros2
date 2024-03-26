@@ -15,7 +15,7 @@
 #include "tf2/transform_datatypes.h"
 #include "tf2/LinearMath/Quaternion.h"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.h"
-#include "behaviortree_cpp_v3/action_node.h"
+#include "behaviortree_cpp/action_node.h"
 
 // Custom type
 struct Pose2D
@@ -47,11 +47,11 @@ Pose2D convertFromString(StringView key)
 }
 } // end namespace BT
 
-class Nav2Client : public BT::AsyncActionNode
+class Nav2Client : public BT::ThreadedAction
 {
 public:
-    Nav2Client(const std::string& name, const BT::NodeConfiguration& config)
-        : BT::AsyncActionNode(name, config)
+    Nav2Client(const std::string& name, const BT::NodeConfig& config)
+        : BT::ThreadedAction(name, config)
     {
     }
 

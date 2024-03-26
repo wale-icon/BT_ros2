@@ -3,12 +3,12 @@
 #include <unistd.h> // Used by sleep
 #include "rclcpp/rclcpp.hpp"
 #include "std_srvs/srv/empty.hpp"
-#include <behaviortree_cpp_v3/action_node.h>
+#include <behaviortree_cpp/action_node.h>
 
 class SnapshotClient : public BT::SyncActionNode
 {
     public:
-        SnapshotClient(const std::string& name, const BT::NodeConfiguration& config)
+        SnapshotClient(const std::string& name, const BT::NodeConfig& config)
             : BT::SyncActionNode(name, config)
         {
             node_ = rclcpp::Node::make_shared("snapshot_client");

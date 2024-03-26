@@ -7,7 +7,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
 #include <unistd.h>
-#include <behaviortree_cpp_v3/action_node.h>
+#include <behaviortree_cpp/action_node.h>
 #include <object_msgs/msg/objects_in_boxes.hpp>
 
 static std::unordered_map<std::string, int> detected_objects;
@@ -27,7 +27,7 @@ void OpenVINOCallback(const object_msgs::msg::ObjectsInBoxes::SharedPtr msg)
 class OpenVINOEvent : public BT::SyncActionNode
 {
     public:
-        OpenVINOEvent(const std::string& name, const BT::NodeConfiguration& config)
+        OpenVINOEvent(const std::string& name, const BT::NodeConfig& config)
             : BT::SyncActionNode(name, config)
         {
             node_ = rclcpp::Node::make_shared("openvino_event");

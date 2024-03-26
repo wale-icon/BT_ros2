@@ -11,8 +11,9 @@
 #include "autodock_client.hpp"
 #endif
 
-#include <behaviortree_cpp_v3/bt_factory.h>
-#include <behaviortree_cpp_v3/loggers/bt_cout_logger.h>
+#include <behaviortree_cpp/bt_factory.h>
+#include <behaviortree_cpp/bt_factory.h>
+#include <behaviortree_cpp/loggers/bt_cout_logger.h>
 
 #define DEFAULT_BT_XML "/home/ros/bt_ros2_ws/src/BT_ros2/bt_xml/bt_nav_mememan.xml"
 
@@ -54,9 +55,8 @@ int main(int argc, char **argv)
     NodeStatus status = NodeStatus::RUNNING;
     // Keep on ticking until you get either a SUCCESS or FAILURE state
     while (rclcpp::ok() && status == NodeStatus::RUNNING) {
-        status = tree.tickRoot();
         // Sleep 100 milliseconds
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        status = tree.tickWhileRunning(std::chrono::milliseconds(100));
     }
   
     return 0;
